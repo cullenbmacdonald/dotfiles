@@ -40,10 +40,16 @@ set smartcase
 set showmatch
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-let mapleader = ","
+" Pathogen
+call pathogen#infect()
 
-inoremap <unique> `` <Esc>
-inoremap <leader>` <Esc>
+call plug#begin('~/.vim/plugged')
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'preservim/nerdtree'
+call plug#end()
+
+let mapleader = ","
 
 " CtrlP Maps
 let g:ctrlp_map = '<c-d>'
@@ -54,14 +60,6 @@ let g:ctrlp_show_hidden = 1
 filetype plugin on
 filetype plugin indent on
 
-set background=dark
-colorscheme solarized
-
-" Use dark theme
-map <leader>dark :set background=dark<cr>
-
-" Use light theme
-map <leader>light :set background=light<cr>
 
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a
@@ -69,8 +67,9 @@ if exists('$TMUX')  " Support resizing in tmux
   set ttymouse=xterm2
 endif
 
-" Pathogen
-call pathogen#infect()
+
+set background=dark
+colorscheme solarized
 
 " Pane minimizing
 map <C-J> <C-W>j<C-W>_
@@ -92,8 +91,15 @@ nnoremap tn  :tabnew<CR>"
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 
+nnoremap - :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
 " Open v-split and select
 nnoremap <leader>w <C-w>v<C-w>l
+
+map `` <CR>
 
 " Yankring view
 map <Leader>v :YRShow<cr>
@@ -121,3 +127,4 @@ autocmd BufRead,BufNewFile *.md set spell
 
 " Don't copy the contents of an overwritten selection.
 vnoremap p "_dP
+
